@@ -16,8 +16,8 @@ def index():
     return jsonify({})
 
 
-@app.route('/verificar-data/<data>')
-def data(data):
+@app.route('/verificar-data/<data_>')
+def data(data_):
     """
         API para ver data
 
@@ -31,10 +31,8 @@ def data(data):
 
         ## Resposta (JSON):
         ''' json
-            {
-                "data_entrada": "12/10/2024",
-                "data_atual": "15/10/2025"
-            }
+            {"data_entrada": "12/10/2024",
+                "data_atual": "15/10/2025"}
         '''
 
         ## Erros possiveis:
@@ -43,7 +41,6 @@ def data(data):
     """
 
     try:
-        data_entrada = datetime.strptime(data, "%d-%m-%Y")
         data_atual = datetime.now()
 
         if data_atual < data_entrada:
@@ -60,12 +57,12 @@ def data(data):
         diferenca_mes = (diferenca_anos * 12) + (data_atual.month - data_entrada.month)
 
         return jsonify({
-            "data_atual": data_atual,
-            "data_entrada": data_entrada,
-            "status": status,
-            "diferenca_dias": str(diferenca_dias),
-            "diferenca_mes": str(diferenca_mes),
-            "diferenca_ano": str(diferenca_anos)
+            "Data atual": data_atual,
+            "Data entrada": data_entrada,
+            "Status": status,
+            "Diferenca dias": str(diferenca_dias),
+            "Diferenca meses": str(diferenca_mes),
+            "Diferenca ano": str(diferenca_anos)
         })
 
 
