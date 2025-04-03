@@ -16,8 +16,8 @@ def index():
     return jsonify({})
 
 
-@app.route('/verificar-data/<data_>')
-def data(data_):
+@app.route('/verificar-data/<data_entrada/data_atual>')
+def data(data_entrada, data_atual):
     """
         API para ver data
 
@@ -41,7 +41,9 @@ def data(data_):
     """
 
     try:
+        data_entrada = str(datetime.strptime(data_, '%d-%m-%Y'))
         data_atual = datetime.now()
+        data_atual = datetime.now().strftime('%d-%m-%Y')
 
         if data_atual < data_entrada:
             status = "futuro"
